@@ -9,7 +9,12 @@ class PageRoutes {
         return MaterialPageRoute(builder: (_) => const HomePage());
 
       case QuizPage.routeName:
-        return MaterialPageRoute(builder: (_) => const QuizPage());
+        var args = settings.arguments as QuizPage;
+        return MaterialPageRoute(
+            builder: (_) => QuizPage(
+                  categoryId: args.categoryId,
+                  difficulty: args.difficulty,
+                ));
 
       default:
         return MaterialPageRoute(builder: (_) => const ErrorPage());

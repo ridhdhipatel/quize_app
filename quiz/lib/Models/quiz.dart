@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:convert';
 
 Quiz quizFromJson(String str) => Quiz.fromJson(json.decode(str));
 
@@ -6,6 +7,27 @@ String quizToJson(Quiz data) => json.encode(data.toJson());
 
 class Quiz {
   Quiz({
+    this.responseCode,
+    this.results,
+  });
+
+  int? responseCode;
+  List<Result>? results;
+
+  factory Quiz.fromJson(Map<String, dynamic> json) => Quiz(
+        responseCode: json["response_code"],
+        results:
+            List<Result>.from(json["results"].map((x) => Result.fromJson(x))),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "response_code": responseCode,
+        "results": List<dynamic>.from(results!.map((x) => x.toJson())),
+      };
+}
+
+class Result {
+  Result({
     this.category,
     this.type,
     this.difficulty,
@@ -21,7 +43,7 @@ class Quiz {
   String? correctAnswer;
   List<String>? incorrectAnswers;
 
-  factory Quiz.fromJson(Map<String, dynamic> json) => Quiz(
+  factory Result.fromJson(Map<String, dynamic> json) => Result(
         category: json["category"],
         type: json["type"],
         difficulty: json["difficulty"],

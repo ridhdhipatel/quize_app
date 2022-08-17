@@ -163,7 +163,12 @@ class _HomePageState extends State<HomePage> {
                                 onPressed: () {
                                   Navigator.of(context).pop();
                                   Navigator.of(context)
-                                      .pushNamed(QuizPage.routeName);
+                                      .pushNamed(QuizPage.routeName,
+                                          arguments: QuizPage(
+                                            categoryId: categories!
+                                                .triviaCategories![index].id!,
+                                            difficulty: difficulty.name,
+                                          ));
                                   setState(() {});
                                 },
                                 child: const Text('Start Quiz!'),
